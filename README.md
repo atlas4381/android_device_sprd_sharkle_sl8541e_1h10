@@ -1,4 +1,4 @@
-# Android device tree for hesc S10 Ultra Max (sl8541e_1h10)
+# Android device tree for "DW99" (sl8541e_1h10)
 
 ```
 #
