@@ -1,0 +1,20 @@
+//
+// Copyright (C) 2024 The LineageOS Project
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+
+// Init scripts
+sh_binary {
+    name: "zram.sh",
+    src: "bin/zram.sh",
+    vendor: true,
+}
+
+// Init configuration files
+// fstab
+prebuilt_etc {
+    name: "fstab.sl8541e_1h10",
+    src: "etc/fstab.sl8541e_1h10",
+    vendor: true,
+}

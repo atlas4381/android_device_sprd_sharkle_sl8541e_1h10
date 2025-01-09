@@ -1,0 +1,44 @@
+# unauthorized adb
+ro.adb.secure=0
+# adb root
+ro.secure=0
+
+dalvik.vm.stack-trace-dir=/data/anr
+heartrate.spo2=true
+heartraue.model.name=NORMAL
+net.bt.name=Android
+persist.sys.3d.calibraion=1
+persist.sys.backcamera=800w
+persist.sys.blending.enable=false
+persist.sys.cam.ba.blur.version=3
+persist.sys.cam.battery.flash = 10
+persist.sys.cam.blur.cov.id=3
+persist.sys.cam.fast.thumb=false
+persist.sys.cam.fr.blur.version=1
+persist.sys.cam.normalhdr=true
+persist.sys.cam.sr.enable=false
+persist.sys.cameraBPX=3264x2448
+persist.sys.cameraFPX=2560x1920
+persist.sys.custom_resolution=368x448
+persist.sys.dalvik.vm.lib.2=libart.so
+persist.sys.firstboot=1
+persist.sys.frontcamera=500w
+persist.sys.paddinglr=20
+persist.sys.sdcardfs=force_on
+persist.sys.show.side.statusbar=true
+ril.sim.phone_ex.start=true
+ro.audio_tunning.nr=1
+ro.config.f11_quick_key_action=true
+ro.frp.pst=/dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/persist
+ro.hsc.anims=hello_goodbye
+ro.hsc.stream_music_max=14
+ro.lockwallpaper.enable=false
+ro.product.assistanttouch=false
+ro.product.hardware=sl8541e_1h10
+ro.product.hscname=k8_v11a_dwq_dw99_cn_zx_hsc_368x448
+ro.radio.flavor=oversea
+ro.sf.lcd_height=36
+ro.sf.lcd_width=32
+ro.stream.voice.call=3
+ro.sys.sdcardfs=true
+ro.wifi.channels=

@@ -1,0 +1,145 @@
+on post-fs
+
+service gnss_download /system/bin/gnss_download
+    class cali
+    user system
+    group system
+    oneshot
+
+service rpmbserver /system/bin/rpmbserver -r /dev/block/mmcblk0rpmb
+    class cali
+    socket rpmbserver stream 0666 rpmbserver rpmbserver
+    group system
+    seclabel u:r:tee:s0
+
+service modem_ctl-cali /system/bin/modem_control
+    class cali
+    user root
+    group system radio shell
+    oneshot
+
+service cp_diskserver /system/bin/cp_diskserver
+    class cali
+    user root
+    group root
+
+service wcnd-cali /vendor/bin/connmgr -R
+    class cali
+    user root
+    group root system shell wifi inet net_bt_admin net_bt_stack
+    seclabel u:r:wcnd:s0
+
+service console-cali /system/bin/sh
+    console
+    class cali
+    user root
+    group root
+    seclabel u:r:shell:s0
+
+service engpcclient /system/bin/engpc
+    class cali
+    user root
+    group root sdcard_rw
+
+on property:ro.bootmode=cali
+    ubiattach 0 ubipac
+    mount_all /etc/recovery.fstab
+    chown system system /data
+    chmod 0771 /data
+    mkdir /data/local 0751 root root
+    mkdir /data/local/englog 0777 root root
+    mkdir /data/local/media 0751 media media
+    mkdir /data/local/slogmodem 0770 shell system
+    mkdir /data/misc 01771 system misc
+    mkdir /data/misc/bluedroid 0770 system system
+    insmod /lib/modules/mali.ko
+    insmod /system/lib/modules/trout_fm.ko
+    insmod /lib/modules/bcmdhd.ko
+    mkdir /data/gnss/ 0777 system system
+    mkdir /data/gnss/bin/ 0777 system system
+    mkdir /data/gnss/supl/ 0777 system system
+    mkdir /data/gnss/config/ 0777 system system
+    mkdir /data/gnss/lte/ 0777 system system
+    chown system system /data/gnss/bin/gnssmodem.bin
+    chown system system /data/gnss/config/config.xml
+    chown system system /data/gnss/supl/supl.xml
+    chown system system /data/gnss/supl/spirentroot.cer
+    chown system system /data/gnss/lte/ext.eph
+    chown system system /data/gnss/lte/jpleph.405
+    chown system system /data/gnss/lte/raw.obs
+    chown system system /data/gnss/gnss.log
+    chown system system /data/gnss/nmea.log
+    chown system system /productinfo/tsx.dat
+    chown system system /productinfo/txdata.txt
+    chown system system /data/gnss/FlashCfg.cg
+    chown system system /sys/class/misc/gnss_common_ctl/gnss_power_enable
+    chown system system /sys/class/misc/gnss_common_ctl/gnss_dump
+    chown system system /sys/class/misc/gnss_common_ctl/gnss_subsys
+    chown system system /dev/gnss_pmnotify_ctl
+    chmod 666 /data/gnss/bin/gnssmodem.bin
+    chmod 666 /data/gnss/config/config.xml
+    chmod 666 /data/gnss/supl/supl.xml
+    chmod 666 /data/gnss/supl/spirentroot.cer
+    chmod 666 /data/gnss/lte/ext.eph
+    chmod 666 /data/gnss/lte/jpleph.405
+    chmod 666 /data/gnss/lte/raw.obs
+    chmod 666 /data/gnss/gnss.log
+    chmod 666 /data/gnss/nmea.log
+    chmod 666 /productinfo/tsx.dat
+    chmod 666 /productinfo/txdata.txt
+    chmod 666 /data/gnss/FlashCfg.cg
+    chmod 220 /sys/class/misc/gnss_common_ctl/gnss_power_enable
+
+    chown system system /dev/iio:device1
+    chown system system /sys/bus/iio/devices/trigger0/name
+    chown system system /sys/bus/iio/devices/iio:device1/buffer
+    chown system system /sys/bus/iio/devices/iio:device1/buffer/length
+    chown system system /sys/bus/iio/devices/iio:device1/buffer/enable
+    chown system system /sys/bus/iio/devices/iio:device1/trigger/current_trigger
+    chown system system /sys/class/sprd_sensorhub/sensor_hub/iio/trigger/current_trigger
+    chown system system /sys/class/sprd_sensorhub/sensor_hub/batch
+    chown system system /sys/class/sprd_sensorhub/sensor_hub/logctl
+    chown system system /sys/class/sprd_sensorhub/sensor_hub/calibrator_cmd
+    chown system system /sys/class/sprd_sensorhub/sensor_hub/calibrator_data
+    chown system system /sys/class/sprd_sensorhub/sensor_hub/enable
+    chown system system /sys/class/sprd_sensorhub/sensor_hub/flush
+    chown system system /sys/class/sprd_sensorhub/sensor_hub/iio
+    chown system system /sys/class/sprd_sensorhub/sensor_hub/version
+    chown system system /sys/class/sprd_sensorhub/sensor_hub/op_download
+    chown system system /sys/class/sprd_sensorhub/sensor_hub/mag_cali_flag
+    chown system system /sys/class/sprd_sensorhub/sensor_hub/sensorhub
+
+    chmod 666 /sys/bus/iio/devices/trigger0/name
+    chmod 666 /sys/bus/iio/devices/iio:device1/buffer/length
+    chmod 666 /sys/bus/iio/devices/iio:device1/buffer/enable
+    chmod 666 /sys/bus/iio/devices/iio:device1/trigger/current_trigger
+    chmod 666 /sys/class/sprd_sensorhub/sensor_hub/iio/trigger/current_trigger
+    chmod 666 /sys/class/sprd_sensorhub/sensor_hub/batch
+    chmod 666 /sys/class/sprd_sensorhub/sensor_hub/logctl
+    chmod 666 /sys/class/sprd_sensorhub/sensor_hub/calibrator_cmd
+    chmod 666 /sys/class/sprd_sensorhub/sensor_hub/calibrator_data
+    chmod 666 /sys/class/sprd_sensorhub/sensor_hub/enable
+    chmod 666 /sys/class/sprd_sensorhub/sensor_hub/flush
+    chmod 666 /sys/class/sprd_sensorhub/sensor_hub/iio
+    chmod 666 /sys/class/sprd_sensorhub/sensor_hub/version
+    chmod 666 /sys/class/sprd_sensorhub/sensor_hub/op_download
+    chmod 666 /sys/class/sprd_sensorhub/sensor_hub/mag_cali_flag
+    chmod 666 /sys/class/sprd_sensorhub/sensor_hub/sensorhub
+
+    mkdir /productinfo/sensor_calibration_data
+
+    mkdir /data/gnss/ 0777 system system
+    mkdir /data/gnss/bin/ 0777 system system
+    mkdir /data/gnss/supl/ 0777 system system
+    mkdir /data/gnss/config/ 0777 system system
+    mkdir /data/gnss/lte/ 0777 system system
+    chmod 666 /data/gnss/bin/gnssmodem.bin
+    chmod 666 /data/gnss/config/config.xml
+    chmod 666 /data/gnss/supl/supl.xml
+    chmod 666 /data/gnss/supl/spirentroot.cer
+    chmod 666 /data/gnss/lte/ext.eph
+    chmod 666 /data/gnss/lte/jpleph.405
+    chmod 666 /data/gnss/gnss.log
+    chmod 666 /data/gnss/nmea.log
+    chmod 666 /productinfo/tsx.dat
+    chmod 666 /productinfo/txdata.txt
